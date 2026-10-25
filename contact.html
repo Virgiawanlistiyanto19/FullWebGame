@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Contact - Game Hub X - RPL 2</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/portal.css">
+</head>
+<body id="top">
+    <a class="skip" href="#konten">Lewati ke konten</a>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Buka atau tutup menu">
+    <header>
+        <div class="bar">
+            <label class="burger" for="menu-toggle" title="Menu"><i class="bi bi-list"></i><span class="vh">Menu</span></label>
+            <a class="brand" href="index.html" title="Kembali ke beranda">
+                <img src="images/logo-icon.png" alt="" width="50" height="50">
+                <span><b>Game Hub</b><small>X-RPL 2</small></span>
+            </a>
+            <form class="search" role="search" action="dashboard.html" method="get">
+                <label class="vh" for="cari">Cari game</label>
+                <input id="cari" type="search" name="q" list="daftar-game" placeholder="Cari game..." autocomplete="off">
+                <button type="submit" aria-label="Cari game"><i class="bi bi-search"></i></button>
+                <datalist id="daftar-game"><option value="Burung Terbang"></datalist>
+            </form>
+            <div class="actions">
+                <a class="ibtn" href="login.html" title="Masuk ke akun" aria-label="Login"><i class="bi bi-person"></i><span class="lbl">Login</span></a>
+                <a class="ibtn fill" href="register.html" title="Buat akun baru" aria-label="Daftar"><i class="bi bi-person-plus"></i><span class="lbl">Daftar</span></a>
+            </div>
+        </div>
+    </header>
+    <label class="scrim" for="menu-toggle" aria-hidden="true"></label>
+    <nav aria-label="Menu utama">
+        <div class="drawer-head">
+            <a class="brand" href="index.html"><img src="images/logo-icon.png" alt="" width="50" height="50"><span><b>Game Hub</b><small>X-RPL 2</small></span></a>
+            <label class="close" for="menu-toggle" title="Tutup menu"><i class="bi bi-x-lg"></i><span class="vh">Tutup menu</span></label>
+        </div>
+        <form class="search drawer-search" role="search" action="dashboard.html" method="get">
+            <label class="vh" for="cari-menu">Cari game</label>
+            <input id="cari-menu" type="search" name="q" list="daftar-game" placeholder="Cari game..." autocomplete="off">
+            <button type="submit" aria-label="Cari game"><i class="bi bi-search"></i></button>
+        </form>
+        <ul>
+            <li><a href="index.html"><i class="bi bi-house-door"></i>Home</a></li>
+            <li><a href="about.html"><i class="bi bi-info-circle"></i>About</a></li>
+            <li><a href="contact.html" aria-current="page"><i class="bi bi-envelope"></i>Contact</a></li>
+            <li><a href="documentation.html"><i class="bi bi-journal-text"></i>Documentation</a></li>
+        </ul>
+        <div class="drawer-foot">
+            <a class="btn ghost" href="login.html"><i class="bi bi-person"></i>Login</a>
+            <a class="btn" href="register.html"><i class="bi bi-person-plus"></i>Daftar</a>
+        </div>
+    </nav>
+    <main id="konten">
+        <section>
+            <h1>Hubungi kami</h1>
+            <p class="lead">Ada game yang error, saran, atau pertanyaan? Tulis di sini dan kami baca.</p>
+            <form action="mailto:portalgame@example.com" method="post" enctype="text/plain">
+                <div class="row">
+                    <label for="nama">Nama</label>
+                    <span class="field"><i class="bi bi-person-vcard"></i><input type="text" id="nama" name="nama" placeholder="Nama kamu" autocomplete="name" required></span>
+                </div>
+                <div class="row">
+                    <label for="email">Email</label>
+                    <span class="field"><i class="bi bi-envelope"></i><input type="email" id="email" name="email" placeholder="nama@email.com" autocomplete="email" required></span>
+                </div>
+                <div class="row">
+                    <label for="pesan">Pesan</label>
+                    <span class="field"><i class="bi bi-chat-left-text"></i><textarea id="pesan" name="pesan" placeholder="Tulis pesanmu" required></textarea></span>
+                </div>
+                <button class="btn" type="submit"><i class="bi bi-send"></i>Kirim pesan</button>
+            </form>
+        </section>
+
+        <article class="faq">
+            <h2>Pertanyaan yang sering muncul</h2>
+            <details>
+                <summary>Perlu memasang aplikasi?</summary>
+                <p>Tidak. Game dimainkan langsung lewat browser, jadi tidak ada yang perlu diunduh.</p>
+            </details>
+            <details>
+                <summary>Bisa dimainkan di HP atau tablet?</summary>
+                <p>Bisa. Game bisa dimainkan di laptop, smartphone, atau tablet. Di layar sentuh, kamu cukup mengetuk atau menggeser jari.</p>
+            </details>
+            <details>
+                <summary>Harus punya akun dulu?</summary>
+                <p>Ya, daftar sekali lalu login. Setelah itu kamu bisa membuka dashboard dan memilih game.</p>
+            </details>
+            <details>
+                <summary>Tidak tahu tombol mainnya?</summary>
+                <p>Semua kontrol dan tips ada di <a href="documentation.html">halaman dokumentasi</a>.</p>
+            </details>
+        </article>
+
+        <aside aria-label="Kontak">
+            <section class="widget">
+                <h2>Kontak langsung</h2>
+                <ul class="contact-list">
+                    <li><i class="bi bi-envelope"></i><span><small>Email</small><a href="mailto:portalgame@example.com">portalgame@example.com</a></span></li>
+                    <li><i class="bi bi-person-badge"></i><span><small>Pembuat</small>Siswa kelas X-RPL 2</span></li>
+                </ul>
+            </section>
+            <section class="widget">
+                <h2>Belum tahu cara mainnya?</h2>
+                <p class="lead" style="margin:0 0 .8rem">Kontrol dan tips Burung Terbang ada di halaman dokumentasi.</p>
+                <a class="btn ghost block" href="documentation.html"><i class="bi bi-journal-text"></i>Buka dokumentasi</a>
+            </section>
+        </aside>
+    </main>
+    <footer>
+        <div class="foot">
+            <div>
+                <a class="brand" href="index.html"><img src="images/logo-icon.png" alt="" width="50" height="50"><span><b>Game Hub</b><small>X-RPL 2</small></span></a>
+                <p>Game Burung Terbang buatan siswa kelas X-RPL 2. Main langsung dari browser, tanpa unduhan.</p>
+            </div>
+            <div>
+                <h2>Halaman</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Game</h2>
+                <ul><li><a href="login.html">Burung Terbang</a></li></ul>
+            </div>
+            <div>
+                <h2>Hubungi kami</h2>
+                <ul>
+                    <li><i class="bi bi-envelope"></i><a href="mailto:portalgame@example.com">portalgame@example.com</a></li>
+                    <li><i class="bi bi-person-badge"></i>Kelas X-RPL 2</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy">
+            <p>Copyright &copy; 2026 Game Hub X - RPL 2. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+    <a class="to-top" href="#top" title="Kembali ke atas" aria-label="Kembali ke atas"><i class="bi bi-arrow-up"></i><span>Ke atas</span></a>
+</body>
+</html>

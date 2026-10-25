@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Dashboard - Game Hub X - RPL 2</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/portal.css">
+</head>
+<body id="top">
+    <a class="skip" href="#konten">Lewati ke konten</a>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Buka atau tutup menu">
+    <header>
+        <div class="bar">
+            <label class="burger" for="menu-toggle" title="Menu"><i class="bi bi-list"></i><span class="vh">Menu</span></label>
+            <a class="brand" href="dashboard.html" title="Kembali ke beranda">
+                <img src="images/logo-icon.png" alt="" width="50" height="50">
+                <span><b>Game Hub</b><small>X-RPL 2</small></span>
+            </a>
+            <form class="search" role="search" action="dashboard.html" method="get">
+                <label class="vh" for="cari">Cari game</label>
+                <input id="cari" type="search" name="q" list="daftar-game" placeholder="Cari game..." autocomplete="off">
+                <button type="submit" aria-label="Cari game"><i class="bi bi-search"></i></button>
+                <datalist id="daftar-game"><option value="Burung Terbang"></datalist>
+            </form>
+            <div class="actions">
+                <span class="who"><i class="bi bi-person-circle"></i><span class="lbl">Halo, <b id="who">Pemain</b></span></span>
+                <a class="ibtn" id="loqout" href="index.html" title="Keluar dari akun" aria-label="Keluar"><i class="bi bi-box-arrow-right"></i><span class="lbl">Keluar</span></a>
+            </div>
+        </div>
+    </header>
+    <label class="scrim" for="menu-toggle" aria-hidden="true"></label>
+    <nav aria-label="Menu utama">
+        <div class="drawer-head">
+            <a class="brand" href="dashboard.html"><img src="images/logo-icon.png" alt="" width="50" height="50"><span><b>Game Hub</b><small>X-RPL 2</small></span></a>
+            <label class="close" for="menu-toggle" title="Tutup menu"><i class="bi bi-x-lg"></i><span class="vh">Tutup menu</span></label>
+        </div>
+        <form class="search drawer-search" role="search" action="dashboard.html" method="get">
+            <label class="vh" for="cari-menu">Cari game</label>
+            <input id="cari-menu" type="search" name="q" list="daftar-game" placeholder="Cari game..." autocomplete="off">
+            <button type="submit" aria-label="Cari game"><i class="bi bi-search"></i></button>
+        </form>
+        <ul>
+            <li><a href="dashboard.html" aria-current="page"><i class="bi bi-house-door"></i>Home</a></li>
+            <li><a href="about.html"><i class="bi bi-info-circle"></i>About</a></li>
+            <li><a href="contact.html"><i class="bi bi-envelope"></i>Contact</a></li>
+            <li><a href="documentation.html"><i class="bi bi-journal-text"></i>Documentation</a></li>
+        </ul>
+        <div class="drawer-foot">
+            <a class="btn ghost" href="index.html"><i class="bi bi-box-arrow-right"></i>Keluar</a>
+        </div>
+    </nav>
+    <main id="konten">
+        <section class="plain" id="menu">
+            <h1>Dashboard game</h1>
+            <p class="notice"><mark style="background:none;color:inherit"><i class="bi bi-check-circle-fill"></i> Login berhasil.</mark> Klik Main untuk mulai bermain Burung Terbang.</p>
+            <ul class="games solo">
+                <li class="card wide">
+                    <a class="shot" href="game5.html" tabindex="-1"><img src="images/game5.jpg" alt="Anak ayam kuning terbang di antara pipa hijau" width="800" height="600" loading="lazy"></a>
+                    <div class="body">
+                        <p class="tag">Arcade</p>
+                        <h3><a href="game5.html" title="Main Burung Terbang">Burung Terbang</a></h3>
+                        <p class="desc">Kepakkan sayap dan lewati celah di antara pipa.</p>
+                        <p class="kontrol"><i class="bi bi-keyboard"></i><span>Spasi atau panah atas</span></p>
+                        <a class="btn" href="game5.html"><i class="bi bi-play-fill"></i>Main</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <article id="cara-bermain">
+            <h2>Kontrol cepat</h2>
+            <p class="lead">Lupa tombolnya? Ini ringkasan kontrol Burung Terbang. Tips lengkap ada di <a href="documentation.html">dokumentasi</a>.</p>
+            <div class="scroll">
+                <table>
+                    <thead><tr><th scope="col">Game</th><th scope="col">Kontrol</th></tr></thead>
+                    <tbody><tr><td><a href="game5.html" style="color:inherit;text-decoration:none">Burung Terbang</a></td><td>Tekan spasi atau panah atas untuk mengepakkan sayap.</td></tr></tbody>
+                </table>
+            </div>
+        </article>
+
+        <aside aria-label="Profil pemain">
+            <section class="widget">
+                <div class="profile">
+                    <i class="bi bi-person-circle"></i>
+                    <p>Pemain<b>Statistik kamu</b></p>
+                </div>
+                <dl class="stats">
+                    <dt>Level</dt><dd id="lvl">1</dd>
+                    <dt>Skor tertinggi</dt><dd id="best">0</dd>
+                    <dt>Game dimainkan</dt><dd id="played">0</dd>
+                </dl>
+            </section>
+            <section class="widget">
+                <h2>Game</h2>
+                <ul class="mini">
+                    <li><img src="images/game5.jpg" alt="" width="84" height="63" loading="lazy"><span><a href="game5.html">Burung Terbang</a><small>Dibuat Kelompok 4</small></span></li>
+                </ul>
+            </section>
+            <section class="widget">
+                <h2>Belum tahu cara mainnya?</h2>
+                <p class="lead" style="margin:0 0 .8rem">Kontrol dan tips Burung Terbang ada di halaman dokumentasi.</p>
+                <a class="btn ghost block" href="documentation.html"><i class="bi bi-journal-text"></i>Buka dokumentasi</a>
+            </section>
+        </aside>
+    </main>
+    <footer>
+        <div class="foot">
+            <div>
+                <a class="brand" href="index.html"><img src="images/logo-icon.png" alt="" width="50" height="50"><span><b>Game Hub</b><small>X-RPL 2</small></span></a>
+                <p>Game Burung Terbang buatan siswa kelas X-RPL 2. Main langsung dari browser, tanpa unduhan.</p>
+            </div>
+            <div>
+                <h2>Halaman</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Game</h2>
+                <ul><li><a href="game5.html">Burung Terbang</a></li></ul>
+            </div>
+            <div>
+                <h2>Hubungi kami</h2>
+                <ul>
+                    <li><i class="bi bi-envelope"></i><a href="mailto:portalgame@example.com">portalgame@example.com</a></li>
+                    <li><i class="bi bi-person-badge"></i>Kelas X-RPL 2</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy">
+            <p>Copyright &copy; 2026 Game Hub X - RPL 2. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+    <a class="to-top" href="#top" title="Kembali ke atas" aria-label="Kembali ke atas"><i class="bi bi-arrow-up"></i><span>Ke atas</span></a>
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

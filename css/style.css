@@ -1,0 +1,357 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #eef0ff;
+  line-height: 1.5;
+  background:
+    radial-gradient(circle at 15% 0, #1a1450, transparent 45%),
+    linear-gradient(135deg, #0a0f2e 55%, #0b2a66);
+  background-attachment: fixed;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.game-page {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  margin: 0;
+}
+.stage {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sp {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+.hud-top {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem 1.6rem;
+  background: linear-gradient(rgba(5, 8, 30, 0.8), transparent);
+}
+.hud-top h1 {
+  margin: 0;
+  font-size: clamp(1rem, 3vmin, 1.6rem);
+  line-height: 1.2;
+  color: #fff;
+}
+
+.hud {
+  margin: 0 0 0 auto;
+  font-weight: 700;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px #000;
+}
+.hud b {
+  color: #ffc83d;
+  font-size: 1.15em;
+}
+
+/* Petunjuk di bawah layar */
+.help {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: 1.2vmin;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 92%;
+  margin: 0;
+  padding: 0.5rem 1.1rem;
+  background: rgba(5, 8, 30, 0.72);
+  border-radius: 18px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.burung {
+  background: linear-gradient(#4fc3f7, #c9f1f7);
+}
+
+.burung .tanah {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12%;
+  background: linear-gradient(#8bc34a 0, #8bc34a 18%, #c9a45c 18%);
+  border-top: 0.6vmin solid #689f38;
+}
+
+.pipa {
+  position: absolute;
+  width: 12vmin;
+  background: #4caf50;
+  border: 0.5vmin solid #1b5e20;
+}
+.pipa::after {
+  content: "";
+  position: absolute;
+  left: -8%;
+  width: 116%;
+  height: 5vmin;
+  background: #66c46a;
+  border: 0.5vmin solid #1b5e20;
+  border-radius: 0.8vmin;
+}
+.pipa.atas {
+  top: 0;
+  height: 30%;
+}
+.pipa.atas::after {
+  bottom: 0;
+}
+.pipa.bawah {
+  bottom: 12%;
+  height: 34%;
+}
+.pipa.bawah::after {
+  top: 0;
+}
+.pipa.p1 {
+  left: 60%;
+}
+.pipa.p2 {
+  left: 84%;
+}
+
+.skor-besar {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 12vmin;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0.6vmin 0 #1a1450;
+}
+
+.burung .awan-1 {
+  left: 14%;
+  top: 24%;
+  width: 13vmin;
+}
+.burung .awan-2 {
+  left: 42%;
+  top: 38%;
+  width: 11vmin;
+}
+.burung .awan-3 {
+  left: 74%;
+  top: 20%;
+  width: 12vmin;
+}
+
+.burung .anak-ayam-1 {
+  left: 30%;
+  top: 50%;
+  width: 16vmin;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  image-rendering: pixelated;
+}
+
+@keyframes awan-hanyut {
+  from {
+    margin-left: 0;
+  }
+  to {
+    margin-left: -6vmin;
+  }
+}
+@keyframes burung-melayang {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -3vmin;
+  }
+}
+.burung .awan-1,
+.burung .awan-2,
+.burung .awan-3 {
+  animation: awan-hanyut 9s ease-in-out infinite alternate;
+}
+.burung .awan-2 {
+  animation-duration: 12s;
+}
+.burung .awan-3 {
+  animation-duration: 15s;
+}
+.burung .anak-ayam-1 {
+  animation: burung-melayang 0.6s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .burung .awan-1,
+  .burung .awan-2,
+  .burung .awan-3,
+  .burung .anak-ayam-1 {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hud-top {
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+  }
+  .hud {
+    margin-left: 0;
+    font-size: 0.85rem;
+  }
+  .help {
+    font-size: 0.78rem;
+  }
+}
+@media (max-height: 480px) {
+  .help {
+    display: none;
+  }
+}
+
+@media (orientation: portrait) {
+  .pipa {
+    width: 16.2vmin;
+  }
+  .pipa::after {
+    height: 6.75vmin;
+  }
+  .skor-besar {
+    font-size: 16.2vmin;
+  }
+  .burung .awan-1 {
+    width: 17.5vmin;
+  }
+  .burung .awan-2 {
+    width: 14.9vmin;
+  }
+  .burung .awan-3 {
+    width: 16.2vmin;
+  }
+  .burung .anak-ayam-1 {
+    width: 21.6vmin;
+  }
+}
+
+/* ===== Tambahan untuk game interaktif (game5.js) ===== */
+.overlay {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 30, 0.45);
+  text-align: center;
+}
+.overlay[hidden] {
+  display: none;
+}
+.overlay .panel {
+  width: min(88%, 380px);
+  padding: 1.4rem 1.6rem;
+  background: rgba(10, 15, 46, 0.92);
+  border: 1px solid #2a2a52;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.8);
+}
+.overlay h2 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.4rem, 5vmin, 2rem);
+  color: #fff;
+}
+.overlay p {
+  margin: 0.3rem 0;
+}
+.overlay .angka {
+  font-size: clamp(2.6rem, 10vmin, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffc83d;
+}
+.overlay .badge {
+  font-weight: 700;
+  color: #7dffb0;
+}
+.overlay .kecil {
+  font-size: 0.8rem;
+  color: #9a9cc2;
+}
+.overlay .aksi {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.btn-game {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font: inherit;
+  font-weight: 700;
+  color: #0a0f2e;
+  text-decoration: none;
+  background: #ffc83d;
+  border: 2px solid #ffc83d;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.btn-game:hover {
+  filter: brightness(1.1);
+}
+.btn-game.ghost {
+  color: #eef0ff;
+  background: transparent;
+  border-color: #5a5d9a;
+}
+.hud-top .kembali {
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.hud-top .kembali:hover {
+  text-decoration: underline;
+}
+.stage.kena {
+  animation: kena-kilat 0.35s ease-out;
+}
+@keyframes kena-kilat {
+  0% {
+    filter: brightness(2) saturate(0.4);
+  }
+  100% {
+    filter: none;
+  }
+}
+.stage {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
