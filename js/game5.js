@@ -1,11 +1,5 @@
 "use strict";
 
-/*
- * game5.js
- * Game Burung Terbang. Memakai elemen yang sudah ada di game5.html
- * (burung, pipa p1/p2, skor besar, HUD) lalu menggerakkannya.
- * Hasil tiap ronde otomatis disimpan ke localStorage (save game akun).
- */
 (() => {
   const user = GameHub.requireLogin();
   if (!user) return;
@@ -19,23 +13,21 @@
   const pipes = ["p1", "p2"].map((name) => ({
     top: stage.querySelector(`.pipa.${name}.atas`),
     bottom: stage.querySelector(`.pipa.${name}.bawah`),
-    x: 2, // posisi kiri, pecahan lebar layar
-    gapTop: 0.3, // pecahan tinggi layar
+    x: 2, 
+    gapTop: 0.3,
     gap: 0.3,
     scored: false,
   }));
 
-  // ---------- konstanta permainan ----------
   const MAX_LIVES = 3;
-  const GROUND_RATIO = 0.88; // tanah mulai di 88% tinggi (tinggi tanah 12%)
-  const GRAVITY = 2.6; // tinggi layar per detik^2
-  const FLAP_SPEED = -0.78; // tinggi layar per detik (naik)
+  const GROUND_RATIO = 0.88; 
+  const GRAVITY = 2.6;
+  const FLAP_SPEED = -0.78; 
   const BIRD_X_RATIO = 0.3;
-  const BASE_SPEED = 0.45; // x ukuran layar terkecil per detik
-  const RESTART_DELAY = 600; // ms, supaya spasi tidak langsung restart
+  const BASE_SPEED = 0.45;
+  const RESTART_DELAY = 600; 
 
-  // ---------- status ----------
-  let state = "ready"; // ready | playing | over
+  let state = "ready"; 
   let score = 0;
   let lives = MAX_LIVES;
   let birdY = 0.5;
@@ -43,10 +35,10 @@
   let lastCenter = 0.5;
   let lastTime = 0;
   let overAt = 0;
-  let recorded = true; // true = tidak ada ronde yang belum disimpan
+  let recorded = true; 
   let save = GameHub.loadSave(user.username);
 
-  // ukuran layar (diukur ulang saat resize)
+
   let W = 0;
   let H = 0;
   let unit = 0;
@@ -74,7 +66,6 @@
     return Math.max(0.28, (birdH * 2.9) / H);
   };
 
-  // ---------- tampilan ----------
   const renderHud = () => {
     const best = Math.max(save.best, score);
     bigScore.textContent = score;
@@ -110,7 +101,6 @@
     bird.style.animation = "";
   };
 
-  // ---------- overlay (mulai / jeda / game over) ----------
   const overlay = document.createElement("div");
   overlay.className = "overlay";
   overlay.hidden = true;
@@ -127,7 +117,7 @@
   const showReady = (title, text) => {
     showOverlay(
       `<div class="panel"><h2>${title}</h2><p>${text}</p>` +
-        `<p class="kecil">Halo, ${GameHub.escapeHTML(user.nama)}!</p></div>`
+        `<p class="kecil">Halo, ${GameHub.escapeHTML(user.nama)}!</p></div>`,
     );
   };
 
@@ -139,7 +129,9 @@
       `<div class="panel"><h2>Game Over</h2>` +
         `<p class="angka">${score}</p>` +
         `<p>Skor terbaik <b>${result.save.best}</b> &middot; Level <b>${result.save.level}</b></p>` +
-        (badges.length ? `<p class="badge">${badges.join(" &nbsp; ")}</p>` : "") +
+        (badges.length
+          ? `<p class="badge">${badges.join(" &nbsp; ")}</p>`
+          : "") +
         `<p class="kecil">${
           result.saved
             ? "Progres tersimpan otomatis di akunmu."
@@ -148,11 +140,10 @@
         `<div class="aksi">` +
         `<button type="button" class="btn-game" data-act="again">Main Lagi</button>` +
         `<a class="btn-game ghost" href="dashboard.html">Dashboard</a>` +
-        `</div></div>`
+        `</div></div>`,
     );
   };
 
-  // ---------- alur permainan ----------
   const resetPipes = () => {
     const spacing = Math.max(0.5, (unit * 0.42) / W);
     pipes.forEach((pipe, index) => {
@@ -191,7 +182,10 @@
     recorded = true;
     resetPipes();
     placeReady();
-    showReady("Siap?", "Tekan spasi, panah atas, atau ketuk layar untuk mulai.");
+    showReady(
+      "Siap?",
+      "Tekan spasi, panah atas, atau ketuk layar untuk mulai.",
+    );
   };
 
   const flap = () => {
@@ -228,7 +222,10 @@
       lastCenter = 0.5;
       resetPipes();
       placeReady();
-      showReady("Kena!", `Sisa nyawa ❤️${lives}. Tekan spasi atau ketuk layar untuk lanjut.`);
+      showReady(
+        "Kena!",
+        `Sisa nyawa ❤️${lives}. Tekan spasi atau ketuk layar untuk lanjut.`,
+      );
       return;
     }
 
@@ -238,7 +235,7 @@
     const result = finishRound();
     renderHud();
     showGameOver(
-      result || { save, newBest: false, levelUp: false, saved: true }
+      result || { save, newBest: false, levelUp: false, saved: true },
     );
   };
 
@@ -269,7 +266,6 @@
       birdV = Math.max(birdV, 0);
     }
 
-    // pipa
     const speed = unit * BASE_SPEED * (1 + Math.min(score, 40) * 0.01);
     const spacing = Math.max(0.5, (unit * 0.42) / W);
     pipes.forEach((pipe) => {
@@ -307,7 +303,6 @@
     window.requestAnimationFrame(loop);
   };
 
-  // ---------- kontrol ----------
   const handleAction = () => {
     if (state === "ready") {
       startPlaying();
@@ -336,7 +331,6 @@
     if (button) newGame();
   });
 
-  // ---------- jeda & simpan otomatis ----------
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && state === "playing") {
       state = "ready";
@@ -344,7 +338,6 @@
     }
   });
 
-  // Keluar di tengah ronde (tutup tab / ke dashboard): skor tetap disimpan.
   window.addEventListener("pagehide", () => {
     if (!recorded && score > 0) finishRound();
   });
@@ -355,7 +348,6 @@
     if (state === "playing") renderBird();
   });
 
-  // ---------- mulai ----------
   if (help) help.hidden = false;
   newGame();
 })();

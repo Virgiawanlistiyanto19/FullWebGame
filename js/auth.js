@@ -1,11 +1,5 @@
 "use strict";
 
-/*
- * auth.js
- * Dipakai di login.html dan register.html.
- *   Register -> data akun disimpan di localStorage -> diarahkan ke login.
- *   Login    -> dicek ke localStorage -> sesi dibuat -> diarahkan ke dashboard.
- */
 (() => {
   if (GameHub.redirectIfLoggedIn()) return;
 
@@ -24,7 +18,6 @@
     if (button) button.disabled = busy;
   };
 
-  // ---------- Register ----------
   const regForm = document.getElementById("regForm");
   if (regForm) {
     regForm.addEventListener("submit", async (event) => {
@@ -69,7 +62,6 @@
     });
   }
 
-  // ---------- Login ----------
   const loginForm = document.getElementById("loginform");
   if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {

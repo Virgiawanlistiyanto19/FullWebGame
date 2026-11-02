@@ -1,14 +1,5 @@
 "use strict";
 
-/*
- * storage.js
- * Pusat semua urusan data Game Hub X-RPL 2 yang disimpan di localStorage:
- *   - akun pengguna (register & login)
- *   - sesi login (siapa yang sedang masuk)
- *   - save game per akun (skor terbaik, level, jumlah main, dst.)
- *
- * Dimuat lebih dulu dari file JS lain, lalu dipakai lewat objek GameHub.
- */
 const GameHub = (() => {
   const KEY_USERS = "gamehub_users";
   const KEY_SESSION = "gamehub_session";
@@ -17,7 +8,6 @@ const GameHub = (() => {
   const SKOR_PER_LEVEL = 20;
   const MAX_HISTORY = 5;
 
-  // ---------- helper localStorage ----------
   const readJSON = (key, fallback) => {
     try {
       const raw = localStorage.getItem(key);
@@ -36,7 +26,6 @@ const GameHub = (() => {
     }
   };
 
-  // ---------- password ----------
   const hashPassword = async (username, password) => {
     const text = `gamehub:${username.toLowerCase()}:${password}`;
     if (window.crypto && window.crypto.subtle) {
@@ -46,16 +35,16 @@ const GameHub = (() => {
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join("");
     }
-    // cadangan kalau browser tidak mendukung crypto.subtle
     return `b64:${btoa(unescape(encodeURIComponent(text)))}`;
   };
 
-  // ---------- akun ----------
   const getUsers = () => readJSON(KEY_USERS, []);
 
   const findUser = (username) => {
     const target = String(username).trim().toLowerCase();
-    return getUsers().find((user) => user.username.toLowerCase() === target) || null;
+    return (
+      getUsers().find((user) => user.username.toLowerCase() === target) || null
+    );
   };
 
   const register = async ({ nama, username, email, password }) => {
@@ -79,7 +68,10 @@ const GameHub = (() => {
     });
 
     if (!writeJSON(KEY_USERS, users)) {
-      return { ok: false, error: "Gagal menyimpan akun. Penyimpanan browser penuh atau diblokir." };
+      return {
+        ok: false,
+        error: "Gagal menyimpan akun. Penyimpanan browser penuh atau diblokir.",
+      };
     }
     return { ok: true };
   };
@@ -97,7 +89,10 @@ const GameHub = (() => {
       localStorage.setItem(KEY_SESSION, user.username);
       sessionStorage.setItem(KEY_FRESH_LOGIN, "1");
     } catch (error) {
-      return { ok: false, error: "Gagal menyimpan sesi login. Cek pengaturan browser kamu." };
+      return {
+        ok: false,
+        error: "Gagal menyimpan sesi login. Cek pengaturan browser kamu.",
+      };
     }
     return { ok: true, user };
   };
@@ -121,7 +116,6 @@ const GameHub = (() => {
     }
   };
 
-  // true hanya sekali setelah login berhasil (untuk pesan "Login berhasil")
   const consumeFreshLogin = () => {
     try {
       const fresh = sessionStorage.getItem(KEY_FRESH_LOGIN) === "1";
@@ -132,7 +126,6 @@ const GameHub = (() => {
     }
   };
 
-  // Dipanggil di halaman yang wajib login (dashboard, game).
   const requireLogin = () => {
     const user = currentUser();
     if (!user) {
@@ -142,7 +135,6 @@ const GameHub = (() => {
     return user;
   };
 
-  // Dipanggil di login/register: kalau sudah login langsung ke dashboard.
   const redirectIfLoggedIn = () => {
     if (currentUser()) {
       window.location.replace("dashboard.html");
@@ -151,7 +143,6 @@ const GameHub = (() => {
     return false;
   };
 
-  // ---------- save game ----------
   const defaultSave = () => ({
     level: 1,
     best: 0,
@@ -164,7 +155,8 @@ const GameHub = (() => {
 
   const saveKey = (username) => KEY_SAVE_PREFIX + username.toLowerCase();
 
-  const levelFromTotal = (totalScore) => Math.floor(totalScore / SKOR_PER_LEVEL) + 1;
+  const levelFromTotal = (totalScore) =>
+    Math.floor(totalScore / SKOR_PER_LEVEL) + 1;
 
   const loadSave = (username) => {
     const stored = readJSON(saveKey(username), null);
@@ -173,7 +165,6 @@ const GameHub = (() => {
 
   const writeSave = (username, data) => writeJSON(saveKey(username), data);
 
-  // Catat satu ronde permainan lalu simpan otomatis.
   const recordGame = (username, score) => {
     const save = loadSave(username);
     const levelBefore = save.level;
@@ -195,18 +186,21 @@ const GameHub = (() => {
     try {
       localStorage.removeItem(saveKey(username));
     } catch (error) {
-      // abaikan
     }
   };
 
   const escapeHTML = (text) =>
-    String(text).replace(/[&<>"']/g, (char) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-    })[char]);
+    String(text).replace(
+      /[&<>"']/g,
+      (char) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[char],
+    );
 
   return {
     SKOR_PER_LEVEL,
